@@ -25,7 +25,7 @@ The approach was developed for a **mobile Digital Audio Workstation (DAW)** that
 - Can be implemented as a **browser-based app, or a WebView** inside a mobile app.
 
 ### Files
-/static/frame.html
+- /static/frame.html
 
 ---
 
@@ -42,10 +42,10 @@ The approach was developed for a **mobile Digital Audio Workstation (DAW)** that
   - **Sliders** (single-direction movements for continuous control).
 
 ### Files
-/static/global.css
-/static/fonts..
-/src/app.html
-/src/+layout.svelte
+- /static/global.css
+- /static/fonts..
+- /src/app.html
+- /src/+layout.svelte
 
 ---
 
@@ -58,7 +58,7 @@ The approach was developed for a **mobile Digital Audio Workstation (DAW)** that
 - Components are typically **mounted inside modules** (Layer 4).
 
 ### Files
-/src/lib/components
+- /src/lib/components
 
 ---
 
