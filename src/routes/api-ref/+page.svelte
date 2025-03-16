@@ -46,7 +46,7 @@
     <WsButton data="0x904000" label="Note off (E4)" />
     <Knob id="cc_10"/>
     <Knob id="cc_12"/>
-    <Knob id="cc_13"/>
+    <Knob id="cc_13" steps="7"/>
     <Knob id="cc_15"/>
     <p>Last sent: {$websockLast.lastSent}</p>
     <p>Last recieved: {$websockLast.lastReceived}</p>

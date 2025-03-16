@@ -2,13 +2,9 @@
   import { controlStore } from "$lib/stores/controls"; // Import the shared store
 
   export let id: string; // Unique ID for each knob or slider
+  export let steps: string | undefined = undefined; // steps is now a string by default
 
-  // Get the value from the store
-  
-  //old solution
-  //$: value = $controlStore[id] ?? 64; // Default to 64 if undefined (?? to allow 0 as valid)
-
-  //new
+  let numSteps: number | 0; //just something..
   let value: number; // Declare value before using it
   $: {
     if (!(id in $controlStore)) {
@@ -17,10 +13,26 @@
     value = $controlStore[id]; // Now safely retrieve it
   }
 
-  function calcKnobRotation(val: number) {
-    const rotationAngle = val * 2 - 128;
-    return `transform: rotate(${rotationAngle}deg);`;
+   // Convert string steps to numeric value and store in _steps
+   $: {
+    if (steps !== undefined) {
+      numSteps = Number(steps); // Convert steps to number and store it privately
+    }
   }
+
+  function calcKnobRotation(val: number) {
+  let rotation = val * 2 - 128; // Normalized rotation
+
+  if (numSteps > 0) {
+    // Quantize the rotation to steps
+    const stepSize = 127 / (numSteps - 1); // Interval per step
+    const quantizedVal = Math.round(val / stepSize) * stepSize; // Quantize the value based on step size
+    rotation = quantizedVal * 2 - 128; // Map it back to a rotation angle
+  }
+
+  return `transform: rotate(${rotation}deg);`;
+}
+
 </script>
 
 <div class="control knobBG">
