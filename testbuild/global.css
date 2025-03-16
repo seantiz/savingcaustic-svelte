@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'LCD';
+    src: url('/fe/fonts/DS-DIGII.ttf') format('truetype');
+}
+
+/* haptic feedback on androd/webkit still a problem.. */
+
+html,
+body {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    touch-action: none;
+    /*overflow: hidden;
+    height: 100%;*/
+}
+
+body {
+    margin: 0;
+    padding: 10;
+    background-color: #fff;
+}
+
+h1 {
+    margin: 0px;
+    padding: 10px;
+    font-family: 'LCD';
+    background-color: #321;
+    color: #ea3;
+    font-size: 4rem;
+}
+
+p {
+    margin: 0px;
+    padding: 10px;
+    font-family: 'Sans-Serif';
+    background-color: #ccd4cc;
+    color: #444;
+    font-size: 2rem;
+}

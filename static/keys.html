@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Piano Keyboard</title>
+    <style>
+        html,
+        body {
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: moz-none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+
+            overflow: hidden;
+            height: 100%;
+            touch-action: none;
+
+            /* Prevents touch gestures like scrolling */
+        }
+
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            /* For iOS Safari */
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .keys {
+            display: flex;
+            user-select: none;
+        }
+
+        .octave {
+            width: 25rem;
+            position: relative;
+            /*background-color:#ced;*/
+            user-select: none;
+        }
+
+        .whites {
+            display: flex;
+        }
+
+        .whites div {
+            width: 14.3%;
+            border: 1px solid #000;
+            border-radius: 0px 0px 3px 3px;
+            height: 10rem;
+            background-color: #f4f4f4;
+            transition: background-color 0.1s ease-in-out;
+        }
+
+        .whites div.active {
+            background: #ccc !important;
+            transition: background-color 0.0s ease-in-out;
+
+        }
+
+        .whites span {
+            position: absolute;
+            padding: 3px;
+            font-size: 0.8rem;
+            color: #666;
+            bottom: 0px;
+        }
+
+        .blacks {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+        }
+
+        .blacks div {
+            position: absolute;
+            width: 8%;
+            border: 1px solid #000;
+            border-radius: 0px 0px 4px 4px;
+            background-color: #000;
+            height: 6rem;
+        }
+
+        .blacks div.active {
+            background: #555 !important;
+            transition: background-color 0.0s ease-in-out;
+
+        }
+
+        .blacks div:nth-child(1) {
+            left: 8.75%;
+        }
+
+        .blacks div:nth-child(2) {
+            left: 25.25%;
+        }
+
+        .blacks div:nth-child(3) {
+            left: 51%;
+        }
+
+        .blacks div:nth-child(4) {
+            left: 67%;
+        }
+
+        .blacks div:nth-child(5) {
+            left: 83%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="keyboard" class="keys">
+        <div class="octave">
+            <div class="whites">
+                <div data-note="C3"><span>C3</span></div>
+                <div data-note="D3"></div>
+                <div data-note="E3"></div>
+                <div data-note="F3"></div>
+                <div data-note="G3"></div>
+                <div data-note="A3"></div>
+                <div data-note="B3"></div>
+            </div>
+            <div class="blacks">
+                <div data-note="C#3"></div>
+                <div data-note="D#3"></div>
+                <div data-note="F#3"></div>
+                <div data-note="G#3"></div>
+                <div data-note="A#3"></div>
+            </div>
+        </div>
+        <div class="octave">
+            <div class="whites">
+                <div data-note="C4"><span>C4</span></div>
+                <div data-note="D4"></div>
+                <div data-note="E4"></div>
+                <div data-note="F4"></div>
+                <div data-note="G4"></div>
+                <div data-note="A4"></div>
+                <div data-note="B4"></div>
+            </div>
+            <div class="blacks">
+                <div data-note="C#4"></div>
+                <div data-note="D#4"></div>
+                <div data-note="F#4"></div>
+                <div data-note="G#4"></div>
+                <div data-note="A#4"></div>
+            </div>
+        </div>
+        <div class="octave">
+            <div class="whites">
+                <div data-note="C5"><span>C5</span></div>
+                <div data-note="D5"></div>
+                <div data-note="E5"></div>
+                <div data-note="F5"></div>
+                <div data-note="G5"></div>
+                <div data-note="A5"></div>
+                <div data-note="B5"></div>
+            </div>
+            <div class="blacks">
+                <div data-note="C#5"></div>
+                <div data-note="D#5"></div>
+                <div data-note="F#5"></div>
+                <div data-note="G#5"></div>
+                <div data-note="A#5"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeNotes = {}; // Track multiple touches
+
+        function playNote(key, pointerId) {
+            if (!key || !key.dataset.note) return;
+            console.log("Play:", key.dataset.note);
+            key.classList.add("active");
+            activeNotes[pointerId] = key;
+        }
+
+        function stopNote(pointerId) {
+            let key = activeNotes[pointerId];
+            if (key) {
+                console.log("Stop:", key.dataset.note);
+                key.classList.remove("active");
+                delete activeNotes[pointerId];
+            }
+        }
+
+        function handlePointerDown(event) {
+            event.preventDefault(); // Prevent long-press actions like context menu
+            let key = event.target.closest("div[data-note]");
+            if (!key) return;
+
+            playNote(key, event.pointerId);
+        }
+
+        function handlePointerMove(event) {
+            if (Object.keys(activeNotes).length === 0) return;
+            let key = document.elementFromPoint(event.clientX, event.clientY);
+            key = key?.closest("div[data-note]");
+            if (!key || key === activeNotes[event.pointerId]) return;
+
+            stopNote(event.pointerId);
+            playNote(key, event.pointerId);
+        }
+
+        function handlePointerUp(event) {
+            stopNote(event.pointerId);
+        }
+
+        function handlePointerLeave(event) {
+            stopNote(event.pointerId);
+        }
+
+        document.getElementById("keyboard").addEventListener("pointerdown", handlePointerDown);
+        document.getElementById("keyboard").addEventListener("pointermove", handlePointerMove);
+        document.getElementById("keyboard").addEventListener("pointerup", handlePointerUp);
+        document.getElementById("keyboard").addEventListener("pointercancel", handlePointerUp);
+        document.getElementById("keyboard").addEventListener("pointerleave", handlePointerLeave);
+        document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+    </script>
+</body>
+
+</html>

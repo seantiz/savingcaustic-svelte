@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+body {
+  margin:5px 0px;
+  background-color:#444;
+}
+
+#root_app {
+  transform-origin: top left; 
+  border: none;
+}
+    </style>
+</head>
+<body>
+  <center>
+    <div style="width:1000px; height:500px; overflow:hidden;">
+      <iframe id="root_app" width="1920" height="960" style="transform: scale(0.52);"></iframe>
+    </div>
+  </center>
+
+  <script>
+    // Get the current hostname and port dynamically
+    const hostname = window.location.hostname;
+    const port = window.location.port ? `:${window.location.port}` : '';
+    const iframeSrc = `http://${hostname}${port}/fe/`; // Modify if needed
+
+    // Set the iframe src
+    document.getElementById('root_app').src = iframeSrc;
+  </script>
+</body>
+</html>

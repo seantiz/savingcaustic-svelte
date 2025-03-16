@@ -1,0 +1,21 @@
+L1: Sida som frame:ar appen i 2:1.
+Anropa file: file:///home/savingcaustic/svelte/alfa/frame.html 
+
+L2: Nån grundframe som etablerar web-socket kommunikation och tja, laddar gloala resurser
+global.css och fonter i /static
+
+* typsnitt och css ok.
+* connecta till websockets nu.
+* binda eventhandlers för touch etc
+
+
+L3:
+Wireframe som visar root-frame.
+
+
+Websocket-server (configured in package.json)
+npm install ws
+npm run ws
+
+
+npm install @sveltejs/adapter-static
