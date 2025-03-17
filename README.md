@@ -11,5 +11,3 @@ To do so:
 * npm run dev
 or
 * npm run preview
-
-
