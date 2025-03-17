@@ -7,7 +7,7 @@ Right now we're using Svelte 4 and you did mention you like the compiler-centric
 There are also serious hidden concerns about Svelte 4 sometimes working off stale data (which Svelte 5 signals is meant to address). In a DAW that's heavy on event-management - that's a real concern where Svelte 5 may be the better answer.
 
 ## What Should Manage the Web View + Touch Layers?
-I didn't inclue it in the diagram but I'd consider adding either Capacitor.js or Tauri to handle UI scaling for all devices (desktop and mobile). Capacitor would be more lightweight than Tauri.
+I didn't include it in the diagram but I'd consider adding either Capacitor.js or Tauri to handle UI scaling for all devices (desktop and mobile). Capacitor would be more lightweight than Tauri.
 
 Alternatively, in a pure web app setup (just Svelte + Kit) there's [Svelte Gestures library](https://github.com/Rezi/svelte-gestures).
 
